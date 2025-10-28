@@ -5,3 +5,7 @@ This is a "nirucon-only" version with no vanilla/upstream option. It installs my
 
 # Disclaimer
 These scripts are personal tools made for my workflow. No warranties and no responsibility for bugs, data loss, or broken systems. Use at your own risk.
+
+# Install
+
+./alpi-suckless.sh
