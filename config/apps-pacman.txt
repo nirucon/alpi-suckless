@@ -108,6 +108,7 @@ blueman            # bluetooth
 # ============================================================
 xclip              # clipboard CLI tool
 brightnessctl      # screen brightness control
+bc                 # calculator
 
 # ============================================================
 # Cloud & Sync
