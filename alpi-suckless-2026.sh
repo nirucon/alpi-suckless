@@ -367,7 +367,7 @@ step_apps() {
   fi
 
   say "Installing ${#AUR_PKGS[@]} AUR packages"
-  run yay -S --needed --noconfirm "${AUR_PKGS[@]}"
+  run yay -S --needed --noconfirm "${AUR_PKGS[@]}" || true
 
   # LazyVim bootstrap
   local nvim_dir="$HOME/.config/nvim"
