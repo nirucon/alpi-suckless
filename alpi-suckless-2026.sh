@@ -154,9 +154,7 @@ AUR_PKGS=(
   ttf-jetbrains-mono-nerd
   brave-bin
   spotify
-  pwvucontrol
   localsend-bin
-  vscodium-bin
   reversal-icon-theme-git
   fresh-editor-bin
 )
