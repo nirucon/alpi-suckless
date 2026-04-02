@@ -401,13 +401,13 @@ EOF
 # ─────────────────────────────────────────────
 step_suckless() {
   should_run suckless || { warn "Skipping: suckless"; return 0; }
-  section "SUCKLESS — dwm, st, dmenu, slock, slstatus"
+  section "SUCKLESS — dwm, st, dmenu, slock"
 
   ensure_dir "$SUCKLESS_DIR" "$LOCAL_BIN" "$XINITRC_HOOKS"
 
   clone_or_pull "$SUCKLESS_REPO" "$SUCKLESS_DIR" "main"
 
-  local components=(dwm st dmenu slock slstatus)
+  local components=(dwm st dmenu slock)
   for comp in "${components[@]}"; do
     if [[ -d "$SUCKLESS_DIR/$comp" ]]; then
       say "Building $comp"
@@ -718,23 +718,23 @@ step_verify() {
 
   chk_cmd() {
     local cmd="$1" label="$2"
-    command -v "$cmd" >/dev/null 2>&1 && ok "$label" || { err "$label: NOT FOUND"; ((failures++)); }
+    command -v "$cmd" >/dev/null 2>&1 && ok "$label" || { err "$label: NOT FOUND"; failures=$((failures+1)); }
   }
   chk_file() {
     local f="$1" label="$2"
-    [[ -f "$f" ]] && ok "$label" || { err "$label: NOT FOUND at $f"; ((failures++)); }
+    [[ -f "$f" ]] && ok "$label" || { err "$label: NOT FOUND at $f"; failures=$((failures+1)); }
   }
   chk_dir() {
     local d="$1" label="$2"
-    [[ -d "$d" ]] && ok "$label" || { err "$label: NOT FOUND at $d"; ((failures++)); }
+    [[ -d "$d" ]] && ok "$label" || { err "$label: NOT FOUND at $d"; failures=$((failures+1)); }
   }
   chk_svc() {
     local svc="$1" label="$2"
-    systemctl is-enabled --quiet "$svc" 2>/dev/null && ok "$label" || { warn "$label: not enabled"; ((warnings++)); }
+    systemctl is-enabled --quiet "$svc" 2>/dev/null && ok "$label" || { warn "$label: not enabled"; warnings=$((warnings+1)); }
   }
   chk_font() {
     local name="$1" label="$2"
-    fc-list | grep -qi "$name" && ok "$label" || { warn "$label: not found"; ((warnings++)); }
+    fc-list | grep -qi "$name" && ok "$label" || { warn "$label: not found"; warnings=$((warnings+1)); }
   }
 
   say "Suckless tools"
@@ -742,7 +742,6 @@ step_verify() {
   chk_cmd st      "st terminal"
   chk_cmd dmenu   "dmenu launcher"
   chk_cmd slock   "slock screen locker"
-  chk_cmd slstatus "slstatus"
 
   say "Essential apps"
   chk_cmd git       "git"
