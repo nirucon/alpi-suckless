@@ -353,7 +353,7 @@ step_apps() {
   section "APPS — Packages (pacman + AUR)"
 
   say "Installing ${#PACMAN_PKGS[@]} pacman packages"
-  run sudo pacman -S --needed --noconfirm "${PACMAN_PKGS[@]}"
+  run sudo pacman -S --needed --noconfirm "${PACMAN_PKGS[@]}" || true
 
   # yay
   if ! command -v yay >/dev/null 2>&1; then
